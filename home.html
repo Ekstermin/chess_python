@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="api chess">
+	<meta name="keywords" content="chess, szachy">
+	<meta name="author" content="Dominik Winiarek">
+
+
+	<title>Chess</title>
+
+</head>
+
+<body>
+	<h1>List of examples website addresses:</h1>
+	<pre>After run app you can check avaibled moves for chessboard [a-h][1-8] position. <br>
+	App only chek moves for white pawns.
+	Avaibled chess figure are:<br>
+	1. king
+	2. queen
+	3. rooks
+	4. bishop
+	5. knights
+	6. pawns<br>
+	To check avaible moves, you need put your figure and position to url like that:
+	http://127.0.0.1:5000/api/v1/{figure}/{field}<br>
+
+	For example list avaiblet move for King from h2 field chek from url:
+	<a href="http://127.0.0.1:5000/api/v1/king/h2">http://127.0.0.1:5000/api/v1/king/h2</a>
+
+	
+	To check validate move from position to position, you need put your figure, curently position, destination position to url like that:
+	http://127.0.0.1:5000/api/v1/{figure}/{field}/{dest-field}
+
+	For example validate move to destination field use url like that:
+	<a href="http://127.0.0.1:5000/api/v1/king/h2/g3">http://127.0.0.1:5000/api/v1/king/h2/g3</a>
+
+	Good luck in the game!!!
+	</pre>
+
+</body>
+
+</html>

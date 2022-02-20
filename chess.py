@@ -76,6 +76,7 @@ class Figure(ABC):
                         move.append(board[xb][ya])
                 except Exception:
                     # print(f"poza szachownicą {x} ,{y}")
+                    print(Exception)
                     continue
         except TypeError:
             move = []
@@ -284,74 +285,210 @@ class Pawns(Figure):
     def __init__(self, field: str):
         super().__init__(field)
 
-    jumps = ((1, -1), (1, 0), (1, 1))
-    jumps2 = ((2, 0),)
+    jumps = ((-1, 1), (0, 1), (1, 1))
+    jumps2 = ((0, 2),)
 
     def list_available_moves(self):
         # print(self.check_pos())
         moves = []
-        if self.check_pos()[0] == 1:
-            # moves.extend(self.moves())
-            moves.extend(self.moves(self.jumps2))
-            moves.extend(self.moves(self.jumps))
-        elif self.check_pos()[0] == 0:
-            moves = None
-        else:
-            moves.extend(self.moves(self.jumps))
+        try:
+            if self.check_pos()[0] == 1:
+                # moves.extend(self.moves())
+                moves.extend(self.moves(self.jumps2))
+                moves.extend(self.moves(self.jumps))
+            elif self.check_pos()[0] == 0:
+                moves = None
+            else:
+                moves.extend(self.moves(self.jumps))
+        except TypeError:
+            # move = [] return emty list if type error for wrong position
+            pass
         return moves
 
     def validate_move(self, dest_field: str):
         return self.validate(dest_field)
 
 
-# king = King("g7g")
-# queen = Queen("d4")
-# rooks = Rooks("h3")
-# bishop = Bishops("c4")
-# knights = Knights("d4")
-# pawns = Pawns("c3")
+# Unit tests, are pasten on the end file becaus is small modu module.
+# #Tested main function because they have error handling
 
 
-# print(king.check_pos())
-# print("król")
+class TestKing:
+    def test_create_King(self):
+        king = King("a1")
+        assert king.field == "a1"
+        assert isinstance(king, King)
 
-# print(king.field)
-# print(king.list_available_moves())
-# print(king.validate_move("g6"))
-# print(king.validate_move("g5"))
-# print("----------------------------\n")
+    def test_list_available_moves(self):
+        king = King("a1")
+        list_move = king.list_available_moves()
+        assert len(list_move) > 0
+        assert type(list_move) is list
+        assert "a2" in list_move
 
-# print("królowa")
-# print(queen.field)
-# print(queen.list_available_moves())
-# print(queen.validate_move("g4"))
-# print(queen.validate_move("e8"))
-# print("----------------------------\n")
+    def test_list_available_moves_bad(self):
+        king = King("a1a")
+        list_move = king.list_available_moves()
+        assert len(list_move) == 0
+        assert type(list_move) is list
 
-# print("wierza")
-# print(rooks.field)
-# print(rooks.list_available_moves())
-# print(rooks.validate_move("b3"))
-# print(rooks.validate_move("b4"))
-# print("----------------------------\n")
+    def test_validate_move(self):
+        king = King("a1")
+        assert king.validate_move("a2")
 
-# print("goniec")
-# print(bishop.field)
-# print(bishop.list_available_moves())
-# print(bishop.validate_move("f7"))
-# print(bishop.validate_move("e1"))
-# print("----------------------------\n")
+    def test_validate_move_false(self):
+        king = King("a1")
+        assert not king.validate_move("a3")
+        assert not king.validate_move("a3a")
 
-# print("koń")
-# print(knights.field)
-# print(knights.list_available_moves())
-# print(knights.validate_move("e2"))
-# print(knights.validate_move("c5"))
-# print("----------------------------\n")
 
-# print("pionek")
-# print(pawns.field)
-# print(pawns.list_available_moves())
-# print(pawns.validate_move("c4"))
-# print(pawns.validate_move("d2"))
-# print("----------------------------\n")
+class TestQueen:
+    def test_create_Queen(self):
+        queen = Queen("a1")
+        assert queen.field == "a1"
+        assert isinstance(queen, Queen)
+
+    def test_list_available_moves(self):
+        queen = Queen("a1")
+        list_move = queen.list_available_moves()
+        assert len(list_move) > 0
+        assert type(list_move) is list
+        assert "a4" in list_move
+
+    def test_list_available_moves_bad(self):
+        queen = Queen("a1a")
+        list_move = queen.list_available_moves()
+        assert len(list_move) == 0
+        assert type(list_move) is list
+
+    def test_validate_move(self):
+        queen = Queen("a1")
+        assert queen.validate_move("a2")
+
+    def test_validate_move_false(self):
+        queen = Queen("a1")
+        assert not queen.validate_move("b3")
+        assert not queen.validate_move("b3b")
+
+
+class TestRooks:
+    def test_create_Rooks(self):
+        rooks = Rooks("a1")
+        assert rooks.field == "a1"
+        assert isinstance(rooks, Rooks)
+
+    def test_list_available_moves(self):
+        rooks = Rooks("a1")
+        list_move = rooks.list_available_moves()
+        assert len(list_move) > 0
+        assert type(list_move) is list
+        assert "a4" in list_move
+
+    def test_list_available_moves_bad(self):
+        rooks = Rooks("a1a")
+        list_move = rooks.list_available_moves()
+        assert len(list_move) == 0
+        assert type(list_move) is list
+
+    def test_validate_move(self):
+        rooks = Rooks("a1")
+        assert rooks.validate_move("a2")
+
+    def test_validate_move_false(self):
+        rooks = Rooks("a1")
+        assert not rooks.validate_move("b3")
+        assert not rooks.validate_move("b3b")
+
+
+class TestBishops:
+    def test_create_Bishops(self):
+        bishops = Bishops("a1")
+        assert bishops.field == "a1"
+        assert isinstance(bishops, Bishops)
+
+    def test_list_available_moves(self):
+        bishops = Bishops("a1")
+        list_move = bishops.list_available_moves()
+        assert len(list_move) > 0
+        assert type(list_move) is list
+        assert "c3" in list_move
+
+    def test_list_available_moves_bad(self):
+        bishops = Bishops("a1a")
+        list_move = bishops.list_available_moves()
+        assert len(list_move) == 0
+        assert type(list_move) is list
+
+    def test_validate_move(self):
+        bishops = Bishops("a1")
+        assert bishops.validate_move("b2")
+
+    def test_validate_move_false(self):
+        bishops = Bishops("a1")
+        assert not bishops.validate_move("b3")
+        assert not bishops.validate_move("b3b")
+
+
+class TestKnights:
+    def test_create_Knights(self):
+        knights = Knights("d4")
+        assert knights.field == "d4"
+        assert isinstance(knights, Knights)
+
+    def test_list_available_moves(self):
+        knights = Knights("d4")
+        list_move = knights.list_available_moves()
+        assert len(list_move) > 0
+        assert type(list_move) is list
+        assert "b3" in list_move
+
+    def test_list_available_moves_bad(self):
+        knights = Knights("a1a")
+        list_move = knights.list_available_moves()
+        assert len(list_move) == 0
+        assert type(list_move) is list
+
+    def test_validate_move(self):
+        knights = Knights("d4")
+        assert knights.validate_move("e2")
+
+    def test_validate_move_false(self):
+        knights = Knights("d4")
+        assert not knights.validate_move("b4")
+        assert not knights.validate_move("b3b")
+
+
+class TestPawns:
+    def test_create_Pawns(self):
+        pawns = Pawns("b2")
+        assert pawns.field == "b2"
+        assert isinstance(pawns, Pawns)
+
+    def test_list_available_moves(self):
+        pawns = Pawns("b2")
+        list_move = pawns.list_available_moves()
+        assert len(list_move) > 0
+        assert type(list_move) is list
+        assert "b4" in list_move
+
+    def test_list_available_moves_second(self):
+        pawns = Pawns("b3")
+        list_move = pawns.list_available_moves()
+        assert len(list_move) > 0
+        assert type(list_move) is list
+        assert "b4" in list_move
+
+    def test_list_available_moves_bad(self):
+        pawns = Pawns("a1a")
+        list_move = pawns.list_available_moves()
+        assert len(list_move) == 0
+        assert type(list_move) is list
+
+    def test_validate_move(self):
+        pawns = Pawns("b2")
+        assert pawns.validate_move("c3")
+
+    def test_validate_move_false(self):
+        pawns = Pawns("b2")
+        assert not pawns.validate_move("b5")
+        assert not pawns.validate_move("b3b")
