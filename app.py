@@ -9,7 +9,7 @@ def check_position(arg_pos: str) -> bool:
     """Check if position is corect"""
     flag = False
     arg_position = arg_pos.lower()
-    print(arg_position)
+    # print(arg_position)
     if len(arg_position) == 2:
         # print("długośc 2")
         try:

@@ -2,7 +2,8 @@
 
 Projekt polega na utworzeniu prostej aplikacji REST wspomagającej grę w szachy.
 
-## Informacje wstępne
+## [PL] Informacje wstępne
+## [ENG] Introductory information
 
 * Python 3.6 - 3.9
 * Black (formatowanie)
@@ -11,7 +12,8 @@ Projekt polega na utworzeniu prostej aplikacji REST wspomagającej grę w szachy
 * Flask 1.0+
 * SQLAlchemy (jeśli potrzeba) - nie użyte da się bez tego i unikniemy błędów serwera ponieważ nie będzie połączenia do bazy danych
 
-## Wymagane moduły
+## [PL] Wymagane moduły
+## [ENG] Required modules
 
 Moduły potrzebne do uruchomienia aplikacji
 ```python
@@ -19,7 +21,8 @@ pip install pytest
 pip install flask
 ```
 
-## Jak uruchomić aplikacje
+## [PL] Jak uruchomić aplikacje
+## [ENG] How to run app
 
 Program napisany i testowany pod Windows 11.
 Program w wersji deweloperskiej.
@@ -36,7 +39,8 @@ Uruchomienie testów po przez następujące polecenia
 python.exe -m pytest app.py -vvv
 python.exe -m pytest chess.py -vvv
 ```
-## Sposób używania api
+## [PL] Sposób używania api
+## [ENG] How to use api
 
 Adres domowy root zawiera informacje jak używać api
 http://127.0.0.1:5000/

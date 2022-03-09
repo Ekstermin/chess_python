@@ -61,7 +61,8 @@ class Figure(ABC):
     def moves(self, planed_moved: tuple) -> list:
         try:
             a, b = check_pos(self.field)
-            # print(self.check_pos())
+            print(a, b)
+            print(self.check_pos())
             # print(self.field)
             move = []
             for x, y in planed_moved:
@@ -74,11 +75,14 @@ class Figure(ABC):
                         pass
                     else:
                         move.append(board[xb][ya])
-                except Exception:
+                except IndexError:
                     # print(f"poza szachownicą {x} ,{y}")
-                    print(Exception)
+                    # print(e.with_traceback)
+                    move = []
                     continue
+
         except TypeError:
+            # print(e)
             move = []
         return move
 
