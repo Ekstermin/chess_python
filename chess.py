@@ -61,8 +61,8 @@ class Figure(ABC):
     def moves(self, planed_moved: tuple) -> list:
         try:
             a, b = check_pos(self.field)
-            print(a, b)
-            print(self.check_pos())
+            # print(a, b)
+            # print(self.check_pos())
             # print(self.field)
             move = []
             for x, y in planed_moved:
